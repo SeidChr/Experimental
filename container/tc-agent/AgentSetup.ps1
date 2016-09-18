@@ -1,3 +1,5 @@
+param([String]$serverHostname)
+
 Import-Module -Name ./AgentSetup.psm1 -Verbose
 $agentName = "TeamCity Docker Build Agent"
 Install-TeamCityAgent `
@@ -5,7 +7,7 @@ Install-TeamCityAgent `
 		-AgentHomeDirectory "./agent/" `
 		-AgentWorkDirectory "./agentWork/" `
 		-AgentPort 9090 `
-		-ServerHostname "teamcity.neveling.net" `
+		-ServerHostname $serverHostname `
 		-ServerPort 80 `
 		
 #$serviceName = Get-TeamCityAgentServiceName -AgentName $agentName

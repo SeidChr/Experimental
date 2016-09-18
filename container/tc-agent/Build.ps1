@@ -1,5 +1,9 @@
-# pass your teamcity server hostname here
 param([String]$serverHostname)
+
+# pass your teamcity server hostname here
+
+Write-Host "Server Hostname: $serverHostname"
+
 
 # In case we need nanoserver packages to be installed in the container, 
 # they need to be downloaded beforehand and copied there. downloading wont work in the container itself
@@ -25,4 +29,4 @@ if ((test-path $installationZipFilePath) -ne $true)
 	Write-Verbose "Downloaded and extracted TeamCity Agent installation zip to $installationZipFilePath"
 }
 
-docker build .
+docker build --build-arg SERVER_HOSTNAME=$serverHostname .

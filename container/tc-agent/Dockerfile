@@ -1,6 +1,9 @@
 FROM microsoft/nanoserver
 MAINTAINER seidchr+docker@gmail.com
 
+ARG SERVER_HOSTNAME
+RUN echo Server: ${SERVER_HOSTNAME}
+
 SHELL ["powershell", "-command"]
 WORKDIR c:/
 
@@ -18,6 +21,6 @@ WORKDIR c:/
 COPY ["AgentSetup.ps1", "AgentSetup.psm1", "./"]
 COPY agent ./agent/
 
-RUN ./AgentSetup.ps1
+RUN ./AgentSetup.ps1 ${SERVER_HOSTNAME}
 
 CMD [ "powershell" ]
